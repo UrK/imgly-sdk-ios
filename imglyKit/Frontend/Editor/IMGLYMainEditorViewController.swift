@@ -42,7 +42,7 @@ public class IMGLYMainEditorViewController: IMGLYEditorViewController {
     public lazy var actionButtons: [IMGLYActionButton] = {
         let bundle = NSBundle(forClass: self.dynamicType)
         var handlers = [IMGLYActionButton]()
-        
+
         handlers.append(
             IMGLYActionButton(
                 title: NSLocalizedString("main-editor.button.magic", tableName: nil, bundle: bundle, value: "", comment: ""),
@@ -166,10 +166,35 @@ public class IMGLYMainEditorViewController: IMGLYEditorViewController {
     }
 
     private func configureOverlay() {
+
+        self.cropSize = CGSizeMake(9, 16)
+
         let overlayView = IMGLYCropOverlayView(frame: self.view.bounds)
+
+        let viewWidth = CGRectGetWidth(self.view.bounds)
+        let viewHeight = CGRectGetHeight(self.view.bounds)
+
+        let viewAspectRatio = viewHeight / viewWidth
+        let cropAspectRatio = cropSize.height / cropSize.width
+        var overlayFrame: CGRect
+
+        if viewAspectRatio > cropAspectRatio {
+            overlayFrame = CGRectMake(
+                0,
+                (viewHeight - (viewWidth * cropAspectRatio)) / 2,
+                CGRectGetWidth(self.view.bounds),
+                viewWidth * cropAspectRatio)
+        } else {
+            overlayFrame = CGRectMake(
+                (viewWidth - (viewHeight / cropAspectRatio)) / 2,
+                0,
+                viewHeight / cropAspectRatio,
+                viewHeight / cropAspectRatio)
+        }
+
         overlayView.backgroundColor = UIColor.clearColor()
         overlayView.userInteractionEnabled = false
-        overlayView.contentFrame = CGRectInset(self.previewImageView.bounds, 50, 50)
+        overlayView.contentFrame = overlayFrame
         self.view.addSubview(overlayView)
     }
     

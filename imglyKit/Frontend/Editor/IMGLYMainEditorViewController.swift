@@ -37,7 +37,7 @@ public class IMGLYMainEditorViewController: IMGLYEditorViewController {
     
     // MARK: - Properties
 
-    public var cropRect = CGSizeZero
+    public var cropSize = CGSizeZero
     
     public lazy var actionButtons: [IMGLYActionButton] = {
         let bundle = NSBundle(forClass: self.dynamicType)

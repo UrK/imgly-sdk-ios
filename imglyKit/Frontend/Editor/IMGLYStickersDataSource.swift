@@ -33,7 +33,27 @@ public class IMGLYStickersDataSource: NSObject, IMGLYStickersDataSourceDelegate 
             "mustache3",
             "pipe",
             "snowflake",
-            "star"
+            "star",
+            "huh",
+            "crunch",
+            "bang",
+            "craaack",
+            "exclamation_01",
+            "ouch",
+            "splat",
+            "boom",
+            "powpow",
+            "zap",
+            "zaap",
+            "zam",
+            "zwosh",
+            "wham",
+            "exclamation_02",
+            "whap",
+            "clang",
+            "zaaap",
+            "vroom",
+            "pow"
         ]
         
         stickers = stickerFiles.map { (file: String) -> IMGLYSticker? in

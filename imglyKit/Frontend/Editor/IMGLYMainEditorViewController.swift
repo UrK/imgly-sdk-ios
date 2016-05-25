@@ -75,11 +75,11 @@ public class IMGLYMainEditorViewController: IMGLYEditorViewController {
                 image: UIImage(named: "icon_option_focus", inBundle: bundle, compatibleWithTraitCollection: nil),
                 handler: { [unowned self] in self.subEditorButtonPressed(.Focus) }))
         
-        handlers.append(
-            IMGLYActionButton(
-                title: NSLocalizedString("main-editor.button.crop", tableName: nil, bundle: bundle, value: "", comment: ""),
-                image: UIImage(named: "icon_option_crop", inBundle: bundle, compatibleWithTraitCollection: nil),
-                handler: { [unowned self] in self.subEditorButtonPressed(.Crop) }))
+//        handlers.append(
+//            IMGLYActionButton(
+//                title: NSLocalizedString("main-editor.button.crop", tableName: nil, bundle: bundle, value: "", comment: ""),
+//                image: UIImage(named: "icon_option_crop", inBundle: bundle, compatibleWithTraitCollection: nil),
+//                handler: { [unowned self] in self.subEditorButtonPressed(.Crop) }))
         
         handlers.append(
             IMGLYActionButton(

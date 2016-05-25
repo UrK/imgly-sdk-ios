@@ -134,6 +134,7 @@ public class IMGLYMainEditorViewController: IMGLYEditorViewController {
         
         updatePreviewImage()
         configureMenuCollectionView()
+        configureOverlay()
     }
     
     // MARK: - Configuration
@@ -156,6 +157,14 @@ public class IMGLYMainEditorViewController: IMGLYEditorViewController {
         bottomContainerView.addSubview(collectionView)
         bottomContainerView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("|[collectionView]|", options: [], metrics: nil, views: views))
         bottomContainerView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[collectionView]|", options: [], metrics: nil, views: views))
+    }
+
+    private func configureOverlay() {
+        let overlayView = IMGLYCropOverlayView(frame: self.view.bounds)
+        overlayView.backgroundColor = UIColor.clearColor()
+        overlayView.userInteractionEnabled = false
+        overlayView.contentFrame = CGRectInset(overlayView.bounds, 50, 50)
+        self.view.addSubview(overlayView)
     }
     
     // MARK: - Helpers

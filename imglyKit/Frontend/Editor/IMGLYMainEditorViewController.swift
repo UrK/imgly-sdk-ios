@@ -36,6 +36,8 @@ private let ButtonCollectionViewCellSize = CGSize(width: 66, height: 90)
 public class IMGLYMainEditorViewController: IMGLYEditorViewController {
     
     // MARK: - Properties
+
+    public var cropRect: CGRect
     
     public lazy var actionButtons: [IMGLYActionButton] = {
         let bundle = NSBundle(forClass: self.dynamicType)
@@ -134,7 +136,11 @@ public class IMGLYMainEditorViewController: IMGLYEditorViewController {
         
         updatePreviewImage()
         configureMenuCollectionView()
-        configureOverlay()
+    }
+
+    override public func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.configureOverlay()
     }
     
     // MARK: - Configuration
@@ -163,7 +169,7 @@ public class IMGLYMainEditorViewController: IMGLYEditorViewController {
         let overlayView = IMGLYCropOverlayView(frame: self.view.bounds)
         overlayView.backgroundColor = UIColor.clearColor()
         overlayView.userInteractionEnabled = false
-        overlayView.contentFrame = CGRectInset(overlayView.bounds, 50, 50)
+        overlayView.contentFrame = CGRectInset(self.previewImageView.bounds, 50, 50)
         self.view.addSubview(overlayView)
     }
     

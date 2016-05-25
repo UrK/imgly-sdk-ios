@@ -43,14 +43,14 @@ public class IMGLYFontSelectorView: UIScrollView {
             if let font = UIFont(name: fontName, size: kFontSize) {
                 button.titleLabel?.font = font
                 addSubview(button)
-                button.addTarget(self, action: "buttonTouchedUpInside:", forControlEvents: UIControlEvents.TouchUpInside)
+                button.addTarget(self, action: #selector(IMGLYFontSelectorView.buttonTouchedUpInside(_:)), forControlEvents: UIControlEvents.TouchUpInside)
             }
         }
     }
     public override func layoutSubviews() {
         super.layoutSubviews()
         
-        for var index = 0; index < subviews.count; index++ {
+        for index in 0 ..< subviews.count {
             if let button = subviews[index] as? UIButton {
                 button.frame = CGRectMake(0,
                     CGFloat(index) * kDistanceBetweenButtons,

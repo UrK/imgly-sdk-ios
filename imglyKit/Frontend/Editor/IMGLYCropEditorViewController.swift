@@ -27,7 +27,7 @@ public class IMGLYCropEditorViewController: IMGLYSubEditorViewController {
         button.textLabel.text = NSLocalizedString("crop-editor.free", tableName: nil, bundle: bundle, value: "", comment: "")
         button.imageView.image = UIImage(named: "icon_crop_custom", inBundle: bundle, compatibleWithTraitCollection: nil)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: "activateFreeRatio:", forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: #selector(IMGLYCropEditorViewController.activateFreeRatio(_:)), forControlEvents: .TouchUpInside)
         return button
         }()
     
@@ -37,7 +37,7 @@ public class IMGLYCropEditorViewController: IMGLYSubEditorViewController {
         button.textLabel.text = NSLocalizedString("crop-editor.1-to-1", tableName: nil, bundle: bundle, value: "", comment: "")
         button.imageView.image = UIImage(named: "icon_crop_square", inBundle: bundle, compatibleWithTraitCollection: nil)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: "activateOneToOneRatio:", forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: #selector(IMGLYCropEditorViewController.activateOneToOneRatio(_:)), forControlEvents: .TouchUpInside)
         return button
         }()
     
@@ -47,7 +47,7 @@ public class IMGLYCropEditorViewController: IMGLYSubEditorViewController {
         button.textLabel.text = NSLocalizedString("crop-editor.4-to-3", tableName: nil, bundle: bundle, value: "", comment: "")
         button.imageView.image = UIImage(named: "icon_crop_4-3", inBundle: bundle, compatibleWithTraitCollection: nil)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: "activateFourToThreeRatio:", forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: #selector(IMGLYCropEditorViewController.activateFourToThreeRatio(_:)), forControlEvents: .TouchUpInside)
         return button
         }()
     
@@ -57,7 +57,7 @@ public class IMGLYCropEditorViewController: IMGLYSubEditorViewController {
         button.textLabel.text = NSLocalizedString("crop-editor.16-to-9", tableName: nil, bundle: bundle, value: "", comment: "")
         button.imageView.image = UIImage(named: "icon_crop_16-9", inBundle: bundle, compatibleWithTraitCollection: nil)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: "activateSixteenToNineRatio:", forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: #selector(IMGLYCropEditorViewController.activateSixteenToNineRatio(_:)), forControlEvents: .TouchUpInside)
         return button
         }()
     
@@ -195,7 +195,7 @@ public class IMGLYCropEditorViewController: IMGLYSubEditorViewController {
     
     private func addGestureRecognizerToTransparentView() {
         transparentRectView.userInteractionEnabled = true
-        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: "handlePan:")
+        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(IMGLYCropEditorViewController.handlePan(_:)))
         transparentRectView.addGestureRecognizer(panGestureRecognizer)
     }
     
@@ -208,7 +208,7 @@ public class IMGLYCropEditorViewController: IMGLYSubEditorViewController {
     
     private func addGestureRecognizerToAnchor(anchor: UIImageView) {
         anchor.userInteractionEnabled = true
-        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: "handlePan:")
+        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(IMGLYCropEditorViewController.handlePan(_:)))
         anchor.addGestureRecognizer(panGestureRecognizer)
     }
     

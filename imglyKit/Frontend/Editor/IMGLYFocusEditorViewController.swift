@@ -18,7 +18,7 @@ public class IMGLYFocusEditorViewController: IMGLYSubEditorViewController {
         button.textLabel.text = NSLocalizedString("focus-editor.off", tableName: nil, bundle: bundle, value: "", comment: "")
         button.imageView.image = UIImage(named: "icon_focus_off", inBundle: bundle, compatibleWithTraitCollection: nil)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: "turnOff:", forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: #selector(IMGLYFocusEditorViewController.turnOff(_:)), forControlEvents: .TouchUpInside)
         return button
         }()
     
@@ -28,7 +28,7 @@ public class IMGLYFocusEditorViewController: IMGLYSubEditorViewController {
         button.textLabel.text = NSLocalizedString("focus-editor.linear", tableName: nil, bundle: bundle, value: "", comment: "")
         button.imageView.image = UIImage(named: "icon_focus_linear", inBundle: bundle, compatibleWithTraitCollection: nil)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: "activateLinear:", forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: #selector(IMGLYFocusEditorViewController.activateLinear(_:)), forControlEvents: .TouchUpInside)
         return button
         }()
     
@@ -38,7 +38,7 @@ public class IMGLYFocusEditorViewController: IMGLYSubEditorViewController {
         button.textLabel.text = NSLocalizedString("focus-editor.radial", tableName: nil, bundle: bundle, value: "", comment: "")
         button.imageView.image = UIImage(named: "icon_focus_radial", inBundle: bundle, compatibleWithTraitCollection: nil)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: "activateRadial:", forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: #selector(IMGLYFocusEditorViewController.activateRadial(_:)), forControlEvents: .TouchUpInside)
         return button
         }()
     

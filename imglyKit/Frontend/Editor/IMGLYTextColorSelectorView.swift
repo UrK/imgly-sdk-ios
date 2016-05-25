@@ -58,7 +58,7 @@ public class IMGLYTextColorSelectorView: UIScrollView {
         for color in colorArray {
             let button = IMGLYColorButton()
             self.addSubview(button)
-            button.addTarget(self, action: "colorButtonTouchedUpInside:", forControlEvents: .TouchUpInside)
+            button.addTarget(self, action: #selector(IMGLYTextColorSelectorView.colorButtonTouchedUpInside(_:)), forControlEvents: .TouchUpInside)
             buttonArray.append(button)
             button.backgroundColor = color
             button.hasFrame = true
@@ -72,7 +72,7 @@ public class IMGLYTextColorSelectorView: UIScrollView {
     
     private func layoutColorButtons() {
         var xPosition = kButtonXPositionOffset
-        for var i = 0; i < colorArray.count; i++ {
+        for i in 0 ..< colorArray.count {
             let button = buttonArray[i]
             button.frame = CGRectMake(xPosition,
                 kButtonYPosition,

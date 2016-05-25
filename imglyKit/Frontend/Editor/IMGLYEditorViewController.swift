@@ -81,7 +81,7 @@ public class IMGLYEditorViewController: UIViewController {
     // MARK: - Configuration
     
     private func configureNavigationItems() {
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "tappedDone:")
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(IMGLYEditorViewController.tappedDone(_:)))
     }
     
     private func configureViewHierarchy() {

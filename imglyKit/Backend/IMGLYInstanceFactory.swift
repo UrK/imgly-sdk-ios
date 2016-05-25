@@ -306,6 +306,7 @@ public class IMGLYInstanceFactory {
             "Arvil",
             "Bender",
             "Blanch",
+            "Impact",
             "Cubano",
             "Franchise",
             "Geared Slab",

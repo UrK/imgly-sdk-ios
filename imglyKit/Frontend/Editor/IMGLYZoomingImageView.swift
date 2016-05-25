@@ -73,7 +73,8 @@ public class IMGLYZoomingImageView: UIScrollView {
         if imageView.image != nil {
             if !initialZoomScaleWasSet {
 //                minimumZoomScale = min(frame.size.width / imageView.bounds.size.width, frame.size.height / imageView.bounds.size.height)
-                minimumZoomScale = frame.size.height / imageView.bounds.size.height
+                minimumZoomScale = max(frame.size.height / imageView.bounds.size.height,
+                                       frame.size.width / imageView.bounds.size.width)
                 zoomScale = minimumZoomScale
                 initialZoomScaleWasSet = true
                 

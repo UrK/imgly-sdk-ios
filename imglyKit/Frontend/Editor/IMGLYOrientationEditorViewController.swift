@@ -18,7 +18,7 @@ public class IMGLYOrientationEditorViewController: IMGLYSubEditorViewController 
         button.textLabel.text = NSLocalizedString("orientation-editor.rotate-left", tableName: nil, bundle: bundle, value: "", comment: "")
         button.imageView.image = UIImage(named: "icon_orientation_rotate-l", inBundle: bundle, compatibleWithTraitCollection: nil)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: "rotateLeft:", forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: #selector(IMGLYOrientationEditorViewController.rotateLeft(_:)), forControlEvents: .TouchUpInside)
         return button
         }()
     
@@ -28,7 +28,7 @@ public class IMGLYOrientationEditorViewController: IMGLYSubEditorViewController 
         button.textLabel.text = NSLocalizedString("orientation-editor.rotate-right", tableName: nil, bundle: bundle, value: "", comment: "")
         button.imageView.image = UIImage(named: "icon_orientation_rotate-r", inBundle: bundle, compatibleWithTraitCollection: nil)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: "rotateRight:", forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: #selector(IMGLYOrientationEditorViewController.rotateRight(_:)), forControlEvents: .TouchUpInside)
         return button
         }()
     
@@ -38,7 +38,7 @@ public class IMGLYOrientationEditorViewController: IMGLYSubEditorViewController 
         button.textLabel.text = NSLocalizedString("orientation-editor.flip-horizontally", tableName: nil, bundle: bundle, value: "", comment: "")
         button.imageView.image = UIImage(named: "icon_orientation_flip-h", inBundle: bundle, compatibleWithTraitCollection: nil)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: "flipHorizontally:", forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: #selector(IMGLYOrientationEditorViewController.flipHorizontally(_:)), forControlEvents: .TouchUpInside)
         return button
         }()
     
@@ -48,7 +48,7 @@ public class IMGLYOrientationEditorViewController: IMGLYSubEditorViewController 
         button.textLabel.text = NSLocalizedString("orientation-editor.flip-vertically", tableName: nil, bundle: bundle, value: "", comment: "")
         button.imageView.image = UIImage(named: "icon_orientation_flip-v", inBundle: bundle, compatibleWithTraitCollection: nil)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.addTarget(self, action: "flipVertically:", forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: #selector(IMGLYOrientationEditorViewController.flipVertically(_:)), forControlEvents: .TouchUpInside)
         return button
         }()
     

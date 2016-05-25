@@ -40,7 +40,7 @@ public extension UIImage {
     }
 }
 
-extension UIImageOrientation: CustomStringConvertible {
+extension UIImageOrientation {
     public var description: String {
         switch self {
         case Up: return "Up"

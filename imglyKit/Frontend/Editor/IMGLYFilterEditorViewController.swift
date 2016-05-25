@@ -21,8 +21,8 @@ public class IMGLYFilterEditorViewController: IMGLYSubEditorViewController {
         slider.minimumValue = 0
         slider.maximumValue = 1
         slider.value = 0.75
-        slider.addTarget(self, action: "changeIntensity:", forControlEvents: .ValueChanged)
-        slider.addTarget(self, action: "sliderTouchedUpInside:", forControlEvents: .TouchUpInside)
+        slider.addTarget(self, action: #selector(IMGLYFilterEditorViewController.changeIntensity(_:)), forControlEvents: .ValueChanged)
+        slider.addTarget(self, action: #selector(IMGLYFilterEditorViewController.sliderTouchedUpInside(_:)), forControlEvents: .TouchUpInside)
         
         slider.minimumTrackTintColor = UIColor.whiteColor()
         slider.maximumTrackTintColor = UIColor.whiteColor()
@@ -125,7 +125,7 @@ public class IMGLYFilterEditorViewController: IMGLYSubEditorViewController {
     
     @objc private func changeIntensity(sender: UISlider?) {
         if changeTimer == nil {
-            changeTimer = NSTimer.scheduledTimerWithTimeInterval(updateInterval, target: self, selector: "update:", userInfo: nil, repeats: false)
+            changeTimer = NSTimer.scheduledTimerWithTimeInterval(updateInterval, target: self, selector: #selector(IMGLYFilterEditorViewController.update(_:)), userInfo: nil, repeats: false)
         }
     }
     

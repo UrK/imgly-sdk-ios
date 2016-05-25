@@ -165,14 +165,14 @@ public class IMGLYTextEditorViewController: IMGLYSubEditorViewController {
     }
     
     private func registerForKeyboardNotifications() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillChangeFrame:", name: UIKeyboardWillChangeFrameNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(IMGLYTextEditorViewController.keyboardWillChangeFrame(_:)), name: UIKeyboardWillChangeFrameNotification, object: nil)
     }
     
     private func configureGestureRecognizers() {
-        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: "handlePan:")
+        let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(IMGLYTextEditorViewController.handlePan(_:)))
         textLabel.addGestureRecognizer(panGestureRecognizer)
 
-        let pinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: "handlePinch:")
+        let pinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(IMGLYTextEditorViewController.handlePinch(_:)))
         view.addGestureRecognizer(pinchGestureRecognizer)
     }
     

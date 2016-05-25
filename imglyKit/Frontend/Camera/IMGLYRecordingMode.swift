@@ -47,7 +47,7 @@ import MobileCoreServices
             button.imageView?.animationRepeatCount = 1
             button.adjustsImageWhenHighlighted = false
             
-            for var index = 0; index < 10; index++ {
+            for index in 0 ..< 10 {
                 let image = String(format: "LensAperture_ShapeLayer_%05d", index)
                 button.imageView?.animationImages?.append(UIImage(named: image, inBundle: bundle, compatibleWithTraitCollection:nil)!)
             }
@@ -63,9 +63,9 @@ import MobileCoreServices
     var actionSelector: Selector {
         switch self {
         case .Photo:
-            return "takePhoto:"
+            return #selector(IMGLYCameraViewController.takePhoto(_:))
         case .Video:
-            return "recordVideo:"
+            return #selector(IMGLYCameraViewController.recordVideo(_:))
         }
     }
     

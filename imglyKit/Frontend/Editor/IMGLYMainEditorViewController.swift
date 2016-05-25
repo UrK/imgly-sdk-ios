@@ -125,7 +125,7 @@ public class IMGLYMainEditorViewController: IMGLYEditorViewController {
         
         let bundle = NSBundle(forClass: self.dynamicType)
         navigationItem.title = NSLocalizedString("main-editor.title", tableName: nil, bundle: bundle, value: "", comment: "")
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: "cancelTapped:")
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(IMGLYMainEditorViewController.cancelTapped(_:)))
         
         navigationController?.delegate = self
         

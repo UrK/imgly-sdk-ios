@@ -18,8 +18,8 @@ public class IMGLYSliderEditorViewController: IMGLYSubEditorViewController {
         slider.maximumValue = self.maximumValue
         slider.value = self.initialValue
         slider.continuous = true
-        slider.addTarget(self, action: "sliderValueChanged:", forControlEvents: .ValueChanged)
-        slider.addTarget(self, action: "sliderTouchedUpInside:", forControlEvents: .TouchUpInside)
+        slider.addTarget(self, action: #selector(IMGLYSliderEditorViewController.sliderValueChanged(_:)), forControlEvents: .ValueChanged)
+        slider.addTarget(self, action: #selector(IMGLYSliderEditorViewController.sliderTouchedUpInside(_:)), forControlEvents: .TouchUpInside)
         slider.translatesAutoresizingMaskIntoConstraints = false
         return slider
     }()
@@ -73,7 +73,7 @@ public class IMGLYSliderEditorViewController: IMGLYSubEditorViewController {
     
     @objc private func sliderValueChanged(sender: UISlider?) {
         if changeTimer == nil {
-            changeTimer = NSTimer.scheduledTimerWithTimeInterval(updateInterval, target: self, selector: "update:", userInfo: nil, repeats: false)
+            changeTimer = NSTimer.scheduledTimerWithTimeInterval(updateInterval, target: self, selector: #selector(IMGLYSliderEditorViewController.update(_:)), userInfo: nil, repeats: false)
         }
     }
     

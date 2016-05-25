@@ -29,7 +29,7 @@ extension NSTimer {
     
     class func new(after interval: NSTimeInterval, repeats: Bool, _ block: () -> ()) -> NSTimer {
         let actor = NSTimerActor(block)
-        return self.init(timeInterval: interval, target: actor, selector: "fire", userInfo: nil, repeats: repeats)
+        return self.init(timeInterval: interval, target: actor, selector: #selector(NSTimerActor.fire), userInfo: nil, repeats: repeats)
     }
     
     class func after(interval: NSTimeInterval, _ block: () -> ()) -> NSTimer {

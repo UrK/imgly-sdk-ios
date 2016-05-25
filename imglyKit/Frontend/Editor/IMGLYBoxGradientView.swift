@@ -84,13 +84,13 @@ public class IMGLYBoxGradientView : UIView {
     }
     
     public func configurePanGestureRecognizer() {
-        let panGestureRecognizer = UIPanGestureRecognizer(target:self, action:"handlePanGesture:")
+        let panGestureRecognizer = UIPanGestureRecognizer(target:self, action:#selector(IMGLYBoxGradientView.handlePanGesture(_:)))
         addGestureRecognizer(panGestureRecognizer)
         crossImageView_.addGestureRecognizer(panGestureRecognizer)
     }
     
     public func configurePinchGestureRecognizer() {
-        let pinchGestureRecognizer = UIPinchGestureRecognizer(target:self, action:"handlePinchGesture:")
+        let pinchGestureRecognizer = UIPinchGestureRecognizer(target:self, action:#selector(IMGLYBoxGradientView.handlePinchGesture(_:)))
         addGestureRecognizer(pinchGestureRecognizer)
     }
     

@@ -46,6 +46,12 @@ public class IMGLYMainEditorViewController: IMGLYEditorViewController, UIScrollV
 
         handlers.append(
             IMGLYActionButton(
+                title: NSLocalizedString("main-editor.button.crop", tableName: nil, bundle: bundle, value: "", comment: ""),
+                image: UIImage(named: "icon_option_crop", inBundle: bundle, compatibleWithTraitCollection: nil),
+                handler: { [unowned self] in self.subEditorButtonPressed(.Crop) }))
+
+        handlers.append(
+            IMGLYActionButton(
                 title: NSLocalizedString("main-editor.button.magic", tableName: nil, bundle: bundle, value: "", comment: ""),
                 image: UIImage(named: "icon_option_magic", inBundle: bundle, compatibleWithTraitCollection: nil),
                 selectedImage: UIImage(named: "icon_option_magic_active", inBundle: bundle, compatibleWithTraitCollection: nil),
@@ -76,12 +82,6 @@ public class IMGLYMainEditorViewController: IMGLYEditorViewController, UIScrollV
                 image: UIImage(named: "icon_option_focus", inBundle: bundle, compatibleWithTraitCollection: nil),
                 handler: { [unowned self] in self.subEditorButtonPressed(.Focus) }))
         
-//        handlers.append(
-//            IMGLYActionButton(
-//                title: NSLocalizedString("main-editor.button.crop", tableName: nil, bundle: bundle, value: "", comment: ""),
-//                image: UIImage(named: "icon_option_crop", inBundle: bundle, compatibleWithTraitCollection: nil),
-//                handler: { [unowned self] in self.subEditorButtonPressed(.Crop) }))
-        
         handlers.append(
             IMGLYActionButton(
                 title: NSLocalizedString("main-editor.button.brightness", tableName: nil, bundle: bundle, value: "", comment: ""),
@@ -105,7 +105,13 @@ public class IMGLYMainEditorViewController: IMGLYEditorViewController, UIScrollV
                 title: NSLocalizedString("main-editor.button.text", tableName: nil, bundle: bundle, value: "", comment: ""),
                 image: UIImage(named: "icon_option_text", inBundle: bundle, compatibleWithTraitCollection: nil),
                 handler: { [unowned self] in self.subEditorButtonPressed(.Text) }))
-        
+
+        handlers.append(
+            IMGLYActionButton(
+                title: NSLocalizedString("Meme", tableName: nil, bundle: bundle, value: "", comment: ""),
+                image: UIImage(named: "icon_option_text", inBundle: bundle, compatibleWithTraitCollection: nil),
+                handler: { [unowned self] in self.startMemeGenerator() }))
+
         return handlers
         }()
     
@@ -120,6 +126,11 @@ public class IMGLYMainEditorViewController: IMGLYEditorViewController, UIScrollV
             generateLowResolutionImage()
         }
     }
+
+    private func startMemeGenerator() {
+        let vc = SFGMemeGeneratorViewController(image: self.previewImageView.image)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     
     // MARK: - UIViewController
     
@@ -129,9 +140,9 @@ public class IMGLYMainEditorViewController: IMGLYEditorViewController, UIScrollV
         let bundle = NSBundle(forClass: self.dynamicType)
         navigationItem.title = NSLocalizedString("main-editor.title", tableName: nil, bundle: bundle, value: "", comment: "")
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(IMGLYMainEditorViewController.cancelTapped(_:)))
-        
+
         navigationController?.delegate = self
-        
+
         fixedFilterStack.effectFilter = IMGLYInstanceFactory.effectFilterWithType(initialFilterType)
         fixedFilterStack.effectFilter.inputIntensity = initialFilterIntensity
         

@@ -33,7 +33,7 @@ public typealias IMGLYEditorCompletionBlock = (IMGLYEditorResult, UIImage?) -> V
 private let ButtonCollectionViewCellReuseIdentifier = "ButtonCollectionViewCell"
 private let ButtonCollectionViewCellSize = CGSize(width: 66, height: 90)
 
-public class IMGLYMainEditorViewController: IMGLYEditorViewController {
+public class IMGLYMainEditorViewController: IMGLYEditorViewController, UIScrollViewDelegate {
     
     // MARK: - Properties
 
@@ -145,9 +145,9 @@ public class IMGLYMainEditorViewController: IMGLYEditorViewController {
         self.previewImageView.frame = self.overlayView!.contentFrame
         self.previewImageView.clipsToBounds = false;
     }
-    
+
     // MARK: - Configuration
-    
+
     private func configureMenuCollectionView() {
         let flowLayout = UICollectionViewFlowLayout()
         flowLayout.itemSize = ButtonCollectionViewCellSize
@@ -271,11 +271,13 @@ public class IMGLYMainEditorViewController: IMGLYEditorViewController {
                 dispatch_async(PhotoProcessorQueue) {
                     filteredHighResolutionImage = IMGLYPhotoProcessor.processWithUIImage(highResolutionImage, filters: self.fixedFilterStack.activeFilters)
 
+                    let imageScale = filteredHighResolutionImage!.size.width / self.previewImageView.image!.size.width
+
                     let cropRect = CGRectMake(
-                        self.previewImageView.contentOffset.x / self.previewImageView.zoomScale,
-                        self.previewImageView.contentOffset.y / self.previewImageView.zoomScale,
-                        CGRectGetWidth(self.previewImageView.bounds) / self.previewImageView.zoomScale,
-                        CGRectGetHeight(self.previewImageView.bounds) / self.previewImageView.zoomScale)
+                        self.previewImageView.contentOffset.x / self.previewImageView.zoomScale * imageScale,
+                        self.previewImageView.contentOffset.y / self.previewImageView.zoomScale * imageScale,
+                        CGRectGetWidth(self.previewImageView.bounds) / self.previewImageView.zoomScale * imageScale,
+                        CGRectGetHeight(self.previewImageView.bounds) / self.previewImageView.zoomScale * imageScale)
 
                     filteredHighResolutionImage = UIImage(CGImage:
                         CGImageCreateWithImageInRect(filteredHighResolutionImage!.CGImage, cropRect)!)

@@ -270,7 +270,16 @@ public class IMGLYMainEditorViewController: IMGLYEditorViewController {
                 sender?.enabled = false
                 dispatch_async(PhotoProcessorQueue) {
                     filteredHighResolutionImage = IMGLYPhotoProcessor.processWithUIImage(highResolutionImage, filters: self.fixedFilterStack.activeFilters)
-                    
+
+                    let cropRect = CGRectMake(
+                        self.previewImageView.contentOffset.x / self.previewImageView.zoomScale,
+                        self.previewImageView.contentOffset.y / self.previewImageView.zoomScale,
+                        CGRectGetWidth(self.previewImageView.bounds) / self.previewImageView.zoomScale,
+                        CGRectGetHeight(self.previewImageView.bounds) / self.previewImageView.zoomScale)
+
+                    filteredHighResolutionImage = UIImage(CGImage:
+                        CGImageCreateWithImageInRect(filteredHighResolutionImage!.CGImage, cropRect)!)
+
                     dispatch_async(dispatch_get_main_queue()) {
                         completionBlock(.Done, filteredHighResolutionImage)
                         sender?.enabled = true

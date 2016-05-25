@@ -166,13 +166,10 @@ public class IMGLYMainEditorViewController: IMGLYEditorViewController {
     }
 
     private func configureOverlay() {
+        let overlayView = IMGLYCropOverlayView(frame: self.previewImageView.bounds)
 
-        self.cropSize = CGSizeMake(9, 16)
-
-        let overlayView = IMGLYCropOverlayView(frame: self.view.bounds)
-
-        let viewWidth = CGRectGetWidth(self.view.bounds)
-        let viewHeight = CGRectGetHeight(self.view.bounds)
+        let viewWidth = CGRectGetWidth(self.previewImageView.bounds)
+        let viewHeight = CGRectGetHeight(self.previewImageView.bounds)
 
         let viewAspectRatio = viewHeight / viewWidth
         let cropAspectRatio = cropSize.height / cropSize.width
@@ -189,7 +186,7 @@ public class IMGLYMainEditorViewController: IMGLYEditorViewController {
                 (viewWidth - (viewHeight / cropAspectRatio)) / 2,
                 0,
                 viewHeight / cropAspectRatio,
-                viewHeight / cropAspectRatio)
+                viewHeight)
         }
 
         overlayView.backgroundColor = UIColor.clearColor()

@@ -142,6 +142,8 @@ public class IMGLYMainEditorViewController: IMGLYEditorViewController {
     override public func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         self.configureOverlay()
+        self.previewImageView.frame = self.overlayView!.contentFrame
+        self.previewImageView.clipsToBounds = false;
     }
     
     // MARK: - Configuration

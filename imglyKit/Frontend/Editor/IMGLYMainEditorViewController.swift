@@ -263,7 +263,27 @@ public class IMGLYMainEditorViewController: IMGLYEditorViewController, UIScrollV
                 let processedImage = IMGLYPhotoProcessor.processWithUIImage(lowResolutionImage, filters: self.fixedFilterStack.activeFilters)
                 
                 dispatch_async(dispatch_get_main_queue()) {
+                    let firstTime = self.previewImageView.image == nil
+                    
                     self.previewImageView.image = processedImage
+                    
+                    if (firstTime){
+                        // center offset
+                        self.previewImageView.initialZoomScaleWasSet = true
+                        
+                        let imgHight = (processedImage?.size.height)!
+                        let imgWidth = (processedImage?.size.width)!
+                        
+                        let offset = CGPointMake(fabs(self.previewImageView.frame.size.width - imgWidth) / 2.0,
+                                                 fabs(self.previewImageView.frame.size.height - imgHight) / 2.0)
+                        self.previewImageView.setContentOffset(offset, animated: false)
+                        
+                        let zoomScale = max(self.previewImageView.frame.size.height / imgHight,
+                                            self.previewImageView.frame.size.width / imgWidth)
+                        self.previewImageView.minimumZoomScale = zoomScale
+                        self.previewImageView.zoomScale = zoomScale
+                    }
+                    
                     self.updating = false
                 }
             }

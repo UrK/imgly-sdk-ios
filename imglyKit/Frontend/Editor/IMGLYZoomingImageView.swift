@@ -21,13 +21,12 @@ public class IMGLYZoomingImageView: UIScrollView {
             imageView.image = newValue
             imageView.sizeToFit()
             contentSize = imageView.frame.size
-            initialZoomScaleWasSet = false
             setNeedsLayout()
         }
     }
     
     private let imageView = UIImageView()
-    private var initialZoomScaleWasSet = false
+    var initialZoomScaleWasSet = false
     public lazy var doubleTapGestureRecognizer: UITapGestureRecognizer = {
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(IMGLYZoomingImageView.doubleTapped(_:)))
         gestureRecognizer.numberOfTapsRequired = 2
@@ -44,6 +43,7 @@ public class IMGLYZoomingImageView: UIScrollView {
     
     override init(frame: CGRect) {
         super.init(frame: CGRect())
+        initialZoomScaleWasSet = false
         commonInit()
     }
 
@@ -72,16 +72,11 @@ public class IMGLYZoomingImageView: UIScrollView {
         
         if imageView.image != nil {
             if !initialZoomScaleWasSet {
-//                minimumZoomScale = min(frame.size.width / imageView.bounds.size.width, frame.size.height / imageView.bounds.size.height)
-                minimumZoomScale = max(frame.size.height / imageView.bounds.size.height,
-                                       frame.size.width / imageView.bounds.size.width)
+                minimumZoomScale = min(frame.size.width / imageView.bounds.size.width, frame.size.height / imageView.bounds.size.height)
+//                minimumZoomScale = max(frame.size.height / imageView.bounds.size.height,
+//                                       frame.size.width / imageView.bounds.size.width)
                 zoomScale = minimumZoomScale
                 initialZoomScaleWasSet = true
-                
-                // center offset
-                let offset = CGPointMake(fabs(frame.size.width - imageView.frame.size.width) / 2.0,
-                                         fabs(frame.size.height - imageView.frame.size.height) / 2.0)
-                setContentOffset(offset, animated: false)
             }
         }
     }

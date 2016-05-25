@@ -38,6 +38,7 @@ public class IMGLYMainEditorViewController: IMGLYEditorViewController {
     // MARK: - Properties
 
     public var cropSize = CGSizeZero
+    private var overlayView: IMGLYCropOverlayView?
     
     public lazy var actionButtons: [IMGLYActionButton] = {
         let bundle = NSBundle(forClass: self.dynamicType)
@@ -166,7 +167,11 @@ public class IMGLYMainEditorViewController: IMGLYEditorViewController {
     }
 
     private func configureOverlay() {
-        let overlayView = IMGLYCropOverlayView(frame: self.previewImageView.bounds)
+
+        if overlayView == nil {
+            overlayView = IMGLYCropOverlayView(frame: self.previewImageView.bounds)
+            self.view.addSubview(overlayView!)
+        }
 
         let viewWidth = CGRectGetWidth(self.previewImageView.bounds)
         let viewHeight = CGRectGetHeight(self.previewImageView.bounds)
@@ -189,10 +194,9 @@ public class IMGLYMainEditorViewController: IMGLYEditorViewController {
                 viewHeight)
         }
 
-        overlayView.backgroundColor = UIColor.clearColor()
-        overlayView.userInteractionEnabled = false
-        overlayView.contentFrame = overlayFrame
-        self.view.addSubview(overlayView)
+        overlayView!.backgroundColor = UIColor.clearColor()
+        overlayView!.userInteractionEnabled = false
+        overlayView!.contentFrame = overlayFrame
     }
     
     // MARK: - Helpers

@@ -76,6 +76,11 @@ public class IMGLYZoomingImageView: UIScrollView {
                 minimumZoomScale = frame.size.height / imageView.bounds.size.height
                 zoomScale = minimumZoomScale
                 initialZoomScaleWasSet = true
+                
+                // center offset
+                let offset = CGPointMake(fabs(frame.size.width - imageView.frame.size.width) / 2.0,
+                                         fabs(frame.size.height - imageView.frame.size.height) / 2.0)
+                setContentOffset(offset, animated: false)
             }
         }
     }

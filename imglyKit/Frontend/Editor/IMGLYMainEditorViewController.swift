@@ -33,12 +33,13 @@ public typealias IMGLYEditorCompletionBlock = (IMGLYEditorResult, UIImage?) -> V
 private let ButtonCollectionViewCellReuseIdentifier = "ButtonCollectionViewCell"
 private let ButtonCollectionViewCellSize = CGSize(width: 66, height: 90)
 
-public class IMGLYMainEditorViewController: IMGLYEditorViewController, UIScrollViewDelegate {
+public class IMGLYMainEditorViewController: IMGLYEditorViewController {
     
     // MARK: - Properties
 
     public var cropSize = CGSizeZero
     private var overlayView: IMGLYCropOverlayView?
+    private var memeGenerator: SFGMemeGeneratorViewController?
     
     public lazy var actionButtons: [IMGLYActionButton] = {
         let bundle = NSBundle(forClass: self.dynamicType)
@@ -109,7 +110,7 @@ public class IMGLYMainEditorViewController: IMGLYEditorViewController, UIScrollV
         handlers.append(
             IMGLYActionButton(
                 title: NSLocalizedString("Meme", tableName: nil, bundle: bundle, value: "", comment: ""),
-                image: UIImage(named: "icon_option_text", inBundle: bundle, compatibleWithTraitCollection: nil),
+                image: UIImage(named: "icon_meme", inBundle: bundle, compatibleWithTraitCollection: nil),
                 handler: { [unowned self] in self.startMemeGenerator() }))
 
         return handlers
@@ -128,11 +129,26 @@ public class IMGLYMainEditorViewController: IMGLYEditorViewController, UIScrollV
     }
 
     private func startMemeGenerator() {
-        let vc = SFGMemeGeneratorViewController(image: self.previewImageView.image)
-        self.navigationController?.pushViewController(vc, animated: true)
+        if memeGenerator == nil {
+            memeGenerator = SFGMemeGeneratorViewController(image: self.previewImageView.image)
+        }
+        self.navigationController?.pushViewController(memeGenerator!, animated: true)
+        self.navigationController?.delegate = self
+    }
+
+    public func navigationController(navigationController: UINavigationController, didShowViewController viewController: UIViewController, animated: Bool) {
+        if viewController != self {
+            return
+        }
+
+        guard let generator = self.memeGenerator else {
+            return
+        }
+
+        self.previewImageView.image = generator.applyMemeToImage(self.previewImageView.image, real: false)
     }
     
-    // MARK: - UIViewController
+    // MAR: - UIViewController
     
     override public func viewDidLoad() {
         super.viewDidLoad()
@@ -312,6 +328,10 @@ public class IMGLYMainEditorViewController: IMGLYEditorViewController, UIScrollV
 
                     filteredHighResolutionImage = UIImage(CGImage:
                         CGImageCreateWithImageInRect(filteredHighResolutionImage!.CGImage, cropRect)!)
+
+                    if self.memeGenerator != nil {
+                        filteredHighResolutionImage = self.memeGenerator!.applyMemeToImage(filteredHighResolutionImage, real: true)
+                    }
 
                     dispatch_async(dispatch_get_main_queue()) {
                         completionBlock(.Done, filteredHighResolutionImage)
